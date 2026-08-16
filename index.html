@@ -11,6 +11,7 @@
     --line:#232734; --text:#E8ECF3; --muted:#91ACC8; --dim:#5C6675;
     --accent:#3B7EF7; --accent2:#66CBF6; --azure:#2D89D7; --cyan:#22C3DC;
     --ok:#4ADE80; --wait:#FFC53D; --plan:#79A7F9;
+    --mono:ui-monospace,"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
     --radius:16px; --maxw:1080px;
   }
   *{box-sizing:border-box}
@@ -26,13 +27,13 @@
   }
   .wrap{max-width:var(--maxw); margin:0 auto; padding:clamp(20px,5vw,56px) clamp(16px,4vw,32px)}
   header{margin-bottom:clamp(24px,4vw,40px)}
-  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600;
-    letter-spacing:1.4px; text-transform:uppercase; color:var(--accent2);
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12px; font-weight:600;
+    letter-spacing:1.6px; text-transform:uppercase; color:var(--accent2);
     padding:6px 12px; border:1px solid var(--line); border-radius:999px; background:rgba(59,126,247,.07)}
   h1{font-size:clamp(26px,6vw,44px); line-height:1.1; margin:16px 0 8px; font-weight:800}
   h1 span{color:var(--accent)}
-  .sub{color:var(--muted); font-size:clamp(15px,2.4vw,18px); max-width:60ch}
-  .updated{margin-top:14px; color:var(--dim); font-size:13px}
+  .sub{color:var(--muted); font-size:clamp(15px,2.4vw,18px); max-width:62ch}
+  .updated{margin-top:14px; color:var(--dim); font-size:13px; font-family:var(--mono)}
 
   .summary{
     margin:clamp(20px,4vw,32px) 0; padding:clamp(16px,3vw,24px);
@@ -42,13 +43,32 @@
   .summary .big{font-size:clamp(17px,2.6vw,20px); font-weight:700; max-width:52ch}
   .metrics{display:flex; gap:14px; flex-wrap:wrap}
   .metric{min-width:96px; padding:12px 16px; border:1px solid var(--line); border-radius:12px; background:var(--bg2)}
-  .metric b{display:block; font-size:clamp(20px,4vw,26px); line-height:1; color:var(--accent2)}
+  .metric b{display:block; font-family:var(--mono); font-size:clamp(20px,4vw,26px); line-height:1; color:var(--accent2)}
   .metric small{color:var(--muted); font-size:12px}
 
-  .grid{display:grid; gap:16px; grid-template-columns:1fr}
-  @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
-  @media(min-width:900px){.grid{grid-template-columns:1fr 1fr 1fr}}
+  .section-title{margin:clamp(28px,5vw,44px) 0 14px; font-family:var(--mono); font-size:12px; letter-spacing:1.6px;
+    text-transform:uppercase; color:var(--dim); font-weight:700}
 
+  /* Featured — крупные ключевые блоки */
+  .featured{display:grid; gap:16px; grid-template-columns:1fr}
+  @media(min-width:820px){.featured{grid-template-columns:1fr 1fr}}
+  .feature{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:var(--radius);
+    background:linear-gradient(180deg,var(--panel),var(--bg2)); padding:22px 22px 22px 26px}
+  .feature::before{content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:linear-gradient(180deg,var(--accent),var(--cyan))}
+  .feature .fh{display:flex; align-items:center; gap:12px; justify-content:space-between; margin-bottom:4px}
+  .feature h2{margin:0; font-size:19px; font-weight:800}
+  .feature .lead{color:var(--text); font-weight:600; font-size:15px; margin:6px 0 12px; opacity:.92}
+  .feature ul{margin:0; padding-left:18px; color:var(--muted); font-size:14px}
+  .feature ul li{margin:7px 0}
+  .feature ul li b{color:var(--text); font-weight:600}
+  .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; padding-top:14px; border-top:1px dashed var(--line)}
+  .tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.6px; text-transform:uppercase; color:var(--accent2);
+    border:1px solid var(--line); border-radius:6px; padding:3px 8px; background:rgba(34,195,220,.06)}
+
+  .grid{display:grid; gap:16px; grid-template-columns:1fr; margin-top:16px}
+  @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:960px){.grid{grid-template-columns:1fr 1fr 1fr}}
   .card{border:1px solid var(--line); border-radius:var(--radius);
     background:linear-gradient(180deg,var(--panel),var(--bg2)); padding:20px; display:flex; flex-direction:column; gap:10px}
   .card h2{margin:0; font-size:16px; font-weight:700; display:flex; align-items:center; gap:10px; justify-content:space-between}
@@ -58,20 +78,16 @@
   .card ul li{margin:4px 0}
   .card ul li b{color:var(--text); font-weight:600}
 
-  .badge{font-size:11px; font-weight:700; letter-spacing:.5px; text-transform:uppercase;
+  .badge{font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
     padding:4px 9px; border-radius:999px; white-space:nowrap}
   .b-ok{color:#06210f; background:var(--ok)}
   .b-go{color:#0a0a0c; background:var(--accent2)}
   .b-plan{color:#0a0a0c; background:var(--plan)}
-  .b-wait{color:#2a1e00; background:var(--wait)}
-
-  .section-title{margin:clamp(28px,5vw,44px) 0 14px; font-size:13px; letter-spacing:1.4px;
-    text-transform:uppercase; color:var(--dim); font-weight:700}
 
   .flow{display:grid; gap:12px; grid-template-columns:1fr}
   @media(min-width:720px){.flow{grid-template-columns:repeat(2,1fr)}}
   .step{border:1px solid var(--line); border-radius:12px; padding:14px 16px; background:var(--bg2); display:flex; gap:12px}
-  .step .n{font-weight:800; color:var(--accent); font-size:18px; min-width:26px}
+  .step .n{font-family:var(--mono); font-weight:800; color:var(--accent); font-size:18px; min-width:26px}
   .step .b{font-size:14px; color:var(--muted)}
   .step .b b{color:var(--text)}
 
@@ -80,7 +96,7 @@
   .wait-list li b{color:var(--text)}
 
   footer{margin-top:clamp(28px,5vw,44px); padding-top:18px; border-top:1px solid var(--line);
-    color:var(--dim); font-size:12px; display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between}
+    color:var(--dim); font-size:12px; display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; font-family:var(--mono)}
   .legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; color:var(--muted); font-size:12px}
   .legend span{display:inline-flex; align-items:center; gap:6px}
 </style>
@@ -91,52 +107,74 @@
     <span class="eyebrow">SMARTOO · Site-Factory</span>
     <h1>План и <span>текущее состояние</span></h1>
     <p class="sub">Платформа-фабрика для сайтов и интернет-магазинов. Ниже — что готово, что в работе и что впереди.</p>
-    <div class="updated">Обновлено: 16 августа 2026</div>
+    <div class="updated">Обновлено: 16.08.2026</div>
   </header>
 
   <div class="summary">
-    <div class="big">Главная броня публикации закрыта; архитектура и герой главной решены. Идёт наполнение контентом и подготовка каталога для новых проектов.</div>
+    <div class="big">Ядро безопасности и архитектура фабрики готовы. Идёт наполнение контентом и подготовка каталога для новых проектов.</div>
     <div class="metrics">
-      <div class="metric"><b>6/6</b><small>дыр доступа закрыто</small></div>
-      <div class="metric"><b>2</b><small>решения зафиксированы (ADR)</small></div>
-      <div class="metric"><b>3</b><small>проекта на фабрике</small></div>
+      <div class="metric"><b>6/6</b><small>путей доступа закрыто</small></div>
+      <div class="metric"><b>2×</b><small>независимая проверка</small></div>
+      <div class="metric"><b>ADR</b><small>решения зафиксированы</small></div>
     </div>
   </div>
 
-  <div class="section-title">Что сделано и в работе</div>
+  <div class="section-title">Фундамент</div>
+  <div class="featured">
+
+    <div class="feature">
+      <div class="fh"><h2>Броня публикации</h2><span class="badge b-ok">Готово</span></div>
+      <div class="lead">Ни одна несанкционированная правка опубликованного контента не проходит — проверено, а не заявлено.</div>
+      <ul>
+        <li><b>Шесть путей</b> изменения живого контента найдены и закрыты: удаление записи, восстановление старой ревизии, смена адреса страницы, подмена происхождения, понижение редакционного статуса, каскад через связанные записи.</li>
+        <li><b>Независимая состязательная проверка</b> вторым агентом на реальном движке CMS — каждый фикс подтверждён отдельной пробой, а не на слово.</li>
+        <li><b>Полная матрица сценариев</b> прогнана на настоящих операциях — включая «а что если проверка сама сломается».</li>
+        <li>Сторож переведён в <b>fail-closed</b>: при внутреннем сбое отказывает, а не пропускает.</li>
+        <li>На <b>каждое правило</b> — исполняемая проверка: регрессия ловится автоматически, а не глазами через недели.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">audit</span><span class="tag">adversarial-verify</span>
+        <span class="tag">fail-closed</span><span class="tag">regression-gated</span>
+        <span class="tag">human-in-the-loop</span>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="fh"><h2>Архитектура фабрики</h2><span class="badge b-ok">Решено</span></div>
+      <div class="lead">Одна платформа-ядро, из которой разворачивается любой проект — с переносом наработок и проверок в готовом виде.</div>
+      <ul>
+        <li><b>Монорепо</b>: версионируемое ядро (движок, платформа, дизайн-система, проверки) + инстансы проектов поверх него.</li>
+        <li><b>Фича-флаги</b>: возможности (каталог, коммерция) включаются на проект — код общий, наработки не запираются в одном сайте.</li>
+        <li><b>Изоляция на рантайме</b>: у каждого проекта своя база, домен и откат — независимо друг от друга.</li>
+        <li><b>Обновление ядра — сразу во всех проектах</b>: фикс не нужно переносить руками, дрейф версий исключён.</li>
+        <li><b>Проверки едут с ядром</b>: каждый новый проект сразу под одними гейтами качества.</li>
+        <li>Решение зафиксировано в <b>ADR 0024</b> — переоткрывать не будем.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">monorepo</span><span class="tag">core+instances</span>
+        <span class="tag">feature-flags</span><span class="tag">runtime-isolation</span>
+        <span class="tag">adr-0024</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Остальное</div>
   <div class="grid">
-
-    <div class="card">
-      <h2><span class="t"><span class="dot" style="background:var(--ok)"></span>Броня публикации</span><span class="badge b-ok">Готово</span></h2>
-      <ul>
-        <li>Все 6 путей несанкционированной правки опубликованного закрыты</li>
-        <li>Сторож переведён в <b>fail-closed</b> (безопасно при сбоях)</li>
-        <li>Каждое правило — с исполняемой проверкой</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2><span class="t"><span class="dot" style="background:var(--ok)"></span>Архитектура</span><span class="badge b-ok">Решено</span></h2>
-      <ul>
-        <li><b>Монорепо-фабрика</b>: одно ядро + инстансы проектов</li>
-        <li>Каталог/коммерция — фабричная фича под флагом</li>
-        <li>Записано в ADR 0024</li>
-      </ul>
-    </div>
 
     <div class="card">
       <h2><span class="t"><span class="dot" style="background:var(--accent2)"></span>Контент</span><span class="badge b-go">В работе</span></h2>
       <ul>
-        <li>Реквизиты и адреса — готовы</li>
-        <li>Отзывы: 51 с Яндекса заводятся; Google/Профи — на извлечении</li>
-        <li>Портфолио, главная, контакты — по образцу текущего сайта</li>
+        <li>Структура и подача — по проверенному образцу</li>
+        <li>Отзывы, портфолио, реквизиты — собираются и проверяются</li>
+        <li>Публикация — только через сторож, решением человека</li>
       </ul>
     </div>
 
     <div class="card">
       <h2><span class="t"><span class="dot" style="background:var(--plan)"></span>Каталог магазина</span><span class="badge b-plan">В плане</span></h2>
       <ul>
-        <li>Источник правды — Payload</li>
+        <li>Источник правды — платформа Payload</li>
         <li>Массовое редактирование: гибрид + таблица-грид позже</li>
         <li>Склад — свой сервис (до 100 заказов/сутки)</li>
         <li>Готовится как фабричная фича для новых проектов</li>
@@ -156,7 +194,7 @@
 
   <div class="section-title">Порядок работ</div>
   <div class="flow">
-    <div class="step"><span class="n">1</span><span class="b"><b>Броня публикации #142-класса</b> — закрыта</span></div>
+    <div class="step"><span class="n">1</span><span class="b"><b>Ядро безопасности публикации</b> — закрыто</span></div>
     <div class="step"><span class="n">2</span><span class="b"><b>Вынос ядра фабрики + фича-флаги</b> — следующий шаг</span></div>
     <div class="step"><span class="n">3</span><span class="b"><b>Каталог как фабричная фича</b> — для новых проектов</span></div>
     <div class="step"><span class="n">4</span><span class="b"><b>Контент по инстансам</b> — публикация через готовый замок</span></div>
@@ -165,13 +203,13 @@
   <div class="section-title">Ждёт решения заказчика</div>
   <ul class="wait-list">
     <li><b>Каталог</b>: витрина или полноценный магазин с оплатой</li>
-    <li><b>Отзывы</b>: тексты Google/Профи — беру на извлечение по вашим ссылкам</li>
-    <li><b>Метрика Яндекса</b> — по-прежнему не подключаем до отдельного решения</li>
+    <li><b>Отзывы</b>: тексты со сторонних площадок — на извлечении</li>
+    <li><b>Метрика</b> — по-прежнему не подключаем до отдельного решения</li>
   </ul>
 
   <footer>
     <span>SMARTOO Site-Factory · внутренний статус проекта</span>
-    <span>Страница обновляется по ходу работ</span>
+    <span>Обновляется по ходу работ</span>
   </footer>
   <div class="legend">
     <span><span class="dot" style="background:var(--ok)"></span>Готово</span>
